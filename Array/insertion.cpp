@@ -6,21 +6,17 @@ using namespace std;
 class insertion
 {
     private:
-        int  *arr, capacity,aSize;
+        int  *arr,aSize;
     public:
          insertion()
          {
-             cout << "Enter the Capacity of the array : ";
-             cin >> capacity;
-             arr = new int [capacity];
              cout << "Enter The Size of the Array: "<<endl;
 	     cin >>aSize;
+	     arr = new int [aSize];
          }
         void read();
         void traverse_arr();
         void insert();
-        int getSize() { return aSize; }
-        int getcapacity() { return capacity; }
         ~ insertion()
         {
          delete arr;
@@ -44,39 +40,27 @@ void insertion :: traverse_arr()
 }
 void insertion :: insert()
 {
-	int num, pos;
-	if(aSize >= capacity)
-	{
-		cout << "Array Is Full : No insertion Possible" <<endl;
-	}
-	else
-	{
+		int num,pos;
 		cout << "Enter the Number to be inserted" <<endl;
 		cin >> num;
 		cout << "Enter the position " <<endl;
 		cin >>pos;
-		for(int i=aSize-1; i >=pos-1; i--)
+		for (int i = pos; i < aSize-1; i++)  // For loop for deleting the position
+        	arr[i] = arr[i + 1];                  // Deleting position
+    		aSize--;
+		for(int i=aSize-1; i >= pos; i--)     // for loop for inserting element
 		{
 			arr[i+1] = arr[i];
 		}
-		arr[pos-1] = num;
+		arr[pos] = num;
 		aSize++;
-	}
 }
 int main()
 {
-    insertion a1;
-    if(a1.getSize() >= a1.getcapacity())
-    {
-    	cout << "You over the max capacity" <<endl;
-    }
-    else
-    {
+    	insertion a1;
     	a1.read();
     	a1.traverse_arr();
     	a1.insert();
     	a1.traverse_arr();
-    }
-    return 0;
-    	
+    return 0;  	
 }
